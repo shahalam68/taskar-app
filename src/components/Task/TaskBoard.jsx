@@ -8,7 +8,7 @@ export default function TaskBoard() {
   const defaultTask = {
     id: crypto.randomUUID(),
     title: "Learn React",
-    descriptions:
+    description:
       " I want to learn react such then i can treat it like a slave and make it do whatever i want to do ",
     tags: ["web", "react", "js"],
     priority: "high",
@@ -17,14 +17,17 @@ export default function TaskBoard() {
   const [tasks, setTasks] = useState([defaultTask]);
   const [showAddModal, setShowAddModal] = useState(false);
 
-  const handleAddTask = () => {
-    console.log("Clicked");
-    setShowAddModal(true);
-  };
+  function handleAddTask(newTask) {
+    console.log("clicked", newTask);
+    debugger;
+    setTasks([...tasks, newTask]);
+    console.log(tasks);
+    setShowAddModal(false);
+  }
 
   return (
     <section className="mb-20" id="tasks">
-      {showAddModal && <AddTaskModal />}
+      {showAddModal && <AddTaskModal onSave={handleAddTask} />}
       <div className="container">
         <div className="p-2 flex justify-end">
           <SearchTask> </SearchTask>
